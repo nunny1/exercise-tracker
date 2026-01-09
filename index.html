@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exercise Program – Progress Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fa;
+  color: #111827;
+}
+
+header {
+  background: #1f2937;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #111827;
+  padding: 10px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav button {
+  background: #374151;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+nav button.active { background: #2563eb; }
+.reset-btn { background: #dc2626; }
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px;
+}
+
+.progress-summary {
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.card-content { margin-top: 10px; }
+.card.collapsed .card-content { display: none; }
+
+.card input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+}
+
+.link {
+  display: block;
+  margin-top: 6px;
+  color: #2563eb;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+ul { padding-left: 18px; }
+.hidden { display: none; }
+
+@media (max-width: 768px) {
+  .card { padding: 12px; }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+.container {
+  width: 100%;
+}
+
+.grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Exercise Program – Progress Tracker</h1>
+  <p>Select your workout for today and track completion</p>
+</header>
+
+<nav>
+  <button class="active" data-day="upper">Upper Day</button>
+  <button data-day="lower">Lower Day</button>
+  <button data-day="cardio">Cardio / Recovery</button>
+  <button class="reset-btn" id="resetBtn">Reset Week</button>
+</nav>
+
+<div class="container">
+  <div class="progress-summary" id="progressSummary">Completion: 0%</div>
+
+<!-- ================= UPPER BODY ================= --> <section id="upper" class="grid"> <div class="card" data-id="upper_cardio_warmup"> <div class="card-header"><strong>Cardio Warm-Up</strong><input type="checkbox"></div> <p> Zone 2 (80 BPM or 30 W @ 80–90 RPM) for 5 min → Zone 4 (120 BPM or 170 W @ 80–90 RPM) for 5 min </p> </div> <div class="card" data-id="upper_rotator_cuff"> <div class="card-header"><strong>Rotator Cuff Warm-Up</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/shorts/1p9yXAl2T58" target="_blank">Rotator Cuff Warm-Up Video</a> <ul> <li>Warm-up for 3 minutes.</li> </ul> </div> <div class="card" data-id="upper_general_warmup"> <div class="card-header"><strong>Warmup Sets</strong><input type="checkbox"></div> <ul> <li>Before each exercise, perform a warmup set at half working weight.</li> <li>Use maximum range of motion.</li> <li>Focus on form and posture for 3 minutes.</li> <li>Rest for 2 minutes before working sets.</li> </ul> </div> <div class="card" data-id="upper_pullups_lat"> <div class="card-header"><strong>Pull-ups / Lat Downs (Drop Sets)</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/shorts/ZPG8OsHKXLw" target="_blank">Pull-Ups Video</a> <a class="link" href="https://www.youtube.com/shorts/gFHQ5S6rPwo" target="_blank">Lat Downs Video</a> <ul> <li>5–10 reps, rest 1 minute.</li> <li>Lower weight 10%, 6–12 reps, rest 1 minute.</li> <li>Lower weight 10%, 8–14 reps, rest 3 minutes.</li> </ul> </div> <div class="card" data-id="upper_incline_chest"> <div class="card-header"><strong>Incline Chest Press (Drop Sets)</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/watch?v=5kyLUGVq_pk" target="_blank">Incline Barbell Chest Press</a> <a class="link" href="https://www.youtube.com/shorts/8fXfwG4ftaQ" target="_blank">Incline Dumbbell Chest Press</a> <ul> <li>5–10 reps, rest 1 minute.</li> <li>Lower weight 10%, 6–12 reps, rest 1 minute.</li> <li>Lower weight 10%, 8–14 reps, rest 3 minutes.</li> </ul> </div> <div class="card" data-id="upper_barbell_rows"> <div class="card-header"><strong>Barbell Rows (Drop Sets)</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/shorts/Nqh7q3zDCoQ" target="_blank">Barbell Rows Video</a> <ul> <li>5–10 reps, rest 1 minute.</li> <li>Lower weight 10%, 6–12 reps, rest 1 minute.</li> <li>Lower weight 10%, 8–14 reps, rest 3 minutes.</li> </ul> </div> <div class="card" data-id="upper_lateral_raises"> <div class="card-header"><strong>Lateral Shoulder Raises (Drop Sets)</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/shorts/X-9hcgf2sX8" target="_blank">Lateral Raises Video</a> <ul> <li>16–20 slow controlled reps, rest 1 min.</li> <li>Lower weight 10%, 16–20 slow reps, rest 1 min.</li> <li>Lower weight 10%, 16–20 slow reps, rest 3 min.</li> </ul> </div> <div class="card" data-id="upper_standing_shoulder_raises"> <div class="card-header"><strong>Standing Shoulder Raises (Drop Sets)</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/watch?v=B-aVuyhvLHU" target="_blank">Standing Shoulder Press Video</a> <ul> <li>16–20 slow controlled reps, rest 1 min.</li> <li>Lower weight 10%, 16–20 slow reps, rest 1 min.</li> <li>Lower weight 10%, 16–20 slow reps, rest 3 min.</li> </ul> </div> <div class="card" data-id="upper_stretch"> <div class="card-header"><strong>Upper Body Stretching</strong><input type="checkbox"></div> <ul> <li>Stretch pectorals, lats, deltoids, biceps, triceps, and hands for 5–10 minutes.</li> </ul> </div> <div class="card" data-id="upper_post_cardio"> <div class="card-header"><strong>Post-Workout Cardio</strong><input type="checkbox"></div> <p>Zone 2 (80 BPM or 30 W @ 80–90 RPM) for 15 minutes.</p> </div> </section> <!-- ================= LOWER BODY ================= --> <section id="lower" class="grid hidden"> <div class="card" data-id="lower_cardio_warmup"> <div class="card-header"><strong>Lower Body Warm-Up Cardio</strong><input type="checkbox"></div> <p> Zone 2 (5 min) → Zone 4 (5 min) </p> </div> <div class="card" data-id="lower_rotator_cuff"> <div class="card-header"><strong>Rotator Cuff Warm-Up</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/shorts/1p9yXAl2T58" target="_blank">Video</a> <ul><li>Warm-up for 3 minutes.</li></ul> </div> <div class="card" data-id="lower_general_warmup"> <div class="card-header"><strong>Warmup Sets</strong><input type="checkbox"></div> <ul> <li>Slow warm-up sets for 3 minutes.</li> <li>Rest 2 minutes before working sets.</li> </ul> </div> <div class="card" data-id="lower_squats"> <div class="card-header"><strong>Squats (Drop Sets)</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/shorts/PPmvh7gBTi0" target="_blank">Squats Video</a> <ul> <li>6–12 reps, rest 1 min.</li> <li>Lower weight 10%, 8–14 reps, rest 1 min.</li> <li>Lower weight 10%, 8–14 reps, rest 3 min.</li> </ul> </div> <div class="card" data-id="lower_rdl"> <div class="card-header"><strong>Romanian Deadlift (Drop Sets)</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/shorts/5rIqP63yWFg" target="_blank">RDL Video</a> <ul> <li>6–12 reps, rest 1 min.</li> <li>Lower weight 10%, 8–14 reps, rest 1 min.</li> <li>Lower weight 10%, 8–14 reps, rest 3 min.</li> </ul> </div> <div class="card" data-id="lower_sumo"> <div class="card-header"><strong>Sumo Deadlift (Drop Sets)</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/shorts/1HLOsYsWV8w" target="_blank">Sumo Deadlift Video</a> <ul> <li>6–12 reps, rest 1 min.</li> <li>Lower weight 10%, 8–14 reps, rest 1 min.</li> <li>Lower weight 10%, 8–14 reps, rest 3 min.</li> </ul> </div> <div class="card" data-id="lower_split_squats"> <div class="card-header"><strong>Split Squats (Drop Sets)</strong><input type="checkbox"></div> <a class="link" href="https://www.youtube.com/shorts/A3ctWjao8cc" target="_blank">Split Squats Video</a> <ul> <li>6–12 reps each side, rest 1 min.</li> <li>Lower weight 10%, 8–14 reps each side, rest 1 min.</li> <li>Lower weight 10%, 8–14 reps each side, rest 3 min.</li> </ul> </div> <div class="card" data-id="lower_stretch"> <div class="card-header"><strong>Lower Body Stretching</strong><input type="checkbox"></div> <ul> <li>Stretch glutes, hamstrings, quads, calves, toes, and abs for 5–10 minutes.</li> </ul> </div> <div class="card" data-id="lower_post_cardio"> <div class="card-header"><strong>Post-Workout Cardio</strong><input type="checkbox"></div> <p>Zone 2 for 15 minutes.</p> </div> </section>
+
+  <!-- ================= CARDIO ================= -->
+  <section id="cardio" class="grid hidden">
+
+    <div class="card" data-id="cardio_1x">
+      <div class="card-header"><strong>Cardio 1× / Week</strong><input type="checkbox"></div>
+      <div class="card-content">45–60 min Zone 2</div>
+    </div>
+
+    <div class="card" data-id="cardio_2x">
+      <div class="card-header"><strong>Cardio 2× / Week</strong><input type="checkbox"></div>
+      <div class="card-content">45–60 min Zone 2</div>
+    </div>
+
+    <div class="card" data-id="cardio_3x">
+      <div class="card-header"><strong>Cardio 3× / Week</strong><input type="checkbox"></div>
+      <div class="card-content">45–60 min Zone 2</div>
+    </div>
+
+    <div class="card" data-id="cardio_hiit">
+      <div class="card-header"><strong>HIIT</strong><input type="checkbox"></div>
+      <div class="card-content">
+        Zone 2 → Zone 4 → Zone 2 for 30–45 min
+      </div>
+    </div>
+
+<strong>Full Body Stretch</strong> <p>Try following this routine nightly before bed or after waking up.</p> <a class="link" href="https://www.youtube.com/watch?v=L_xrDAtykMI" target="_blank"> 15-Minute Full Body Stretch </a>
+
+    <div class="card" data-id="stretch_sun"><div class="card-header"><strong>Sunday</strong><input type="checkbox"></div></div>
+    <div class="card" data-id="stretch_mon"><div class="card-header"><strong>Monday</strong><input type="checkbox"></div></div>
+    <div class="card" data-id="stretch_tue"><div class="card-header"><strong>Tuesday</strong><input type="checkbox"></div></div>
+    <div class="card" data-id="stretch_wed"><div class="card-header"><strong>Wednesday</strong><input type="checkbox"></div></div>
+    <div class="card" data-id="stretch_thu"><div class="card-header"><strong>Thursday</strong><input type="checkbox"></div></div>
+    <div class="card" data-id="stretch_fri"><div class="card-header"><strong>Friday</strong><input type="checkbox"></div></div>
+    <div class="card" data-id="stretch_sat"><div class="card-header"><strong>Saturday</strong><input type="checkbox"></div></div>
+
+  </section>
+</div>
+
+<script>
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbygfOTHuJzjxHu-YzzVc56EcaaI3uhVLusq8zEcwoXUD-6BeR7Dr-j0PzRsiKTDv1qd/exec"; // <-- paste Google Apps Script URL to enable
+
+const buttons = document.querySelectorAll("nav button[data-day]");
+const sections = document.querySelectorAll("section.grid");
+function getWeekKey() {
+  const d = new Date();
+  d.setDate(d.getDate() - d.getDay() + 1); // Monday
+  return "week_" + d.toISOString().slice(0,10);
+}
+
+const weekKey = getWeekKey();
+
+if (localStorage.getItem("lastWeek") !== weekKey) {
+  localStorage.clear();
+  localStorage.setItem("lastWeek", weekKey);
+}
+
+
+if (localStorage.getItem("lastWeek") !== weekKey) {
+  localStorage.clear();
+  localStorage.setItem("lastWeek", weekKey);
+}
+
+buttons.forEach(btn => {
+  btn.onclick = () => {
+    buttons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    sections.forEach(s => s.classList.add("hidden"));
+    document.getElementById(btn.dataset.day).classList.remove("hidden");
+    updateProgress(btn.dataset.day);
+  };
+});
+
+function updateProgress(day) {
+  const cards = document.querySelectorAll(`#${day} .card[data-id]`);
+  const done = [...cards].filter(c => c.querySelector("input").checked).length;
+  document.getElementById("progressSummary").innerText =
+    `Completion (${day.toUpperCase()}): ${Math.round(done / cards.length * 100)}%`;
+}
+
+document.querySelectorAll(".card").forEach(card => {
+  const cb = card.querySelector("input");
+  const id = card.dataset.id;
+  cb.checked = localStorage.getItem(id) === "true";
+
+  card.querySelector(".card-header").onclick = e => {
+    if (e.target.tagName !== "INPUT") card.classList.toggle("collapsed");
+  };
+
+  if (window.innerWidth < 768) card.classList.add("collapsed");
+
+  cb.onchange = () => {
+    localStorage.setItem(id, cb.checked);
+    if (SHEETS_URL)
+      fetch(SHEETS_URL, {
+        method: "POST",
+        body: JSON.stringify({ id, checked: cb.checked, date: new Date() })
+      });
+    updateProgress(document.querySelector("nav button.active").dataset.day);
+  };
+});
+
+document.getElementById("resetBtn").onclick = () => {
+  if (!confirm("Reset all progress?")) return;
+  localStorage.clear();
+  location.reload();
+};
+
+updateProgress("upper");
+</script>
+
+</body>
+</html>
